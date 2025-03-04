@@ -1,4 +1,4 @@
-name: Maven Build
+name: Build
 permissions:
   contents: read # access to check out code and install dependencies
 on:
