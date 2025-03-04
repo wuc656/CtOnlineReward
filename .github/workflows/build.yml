@@ -1,0 +1,29 @@
+name: Maven Build
+permissions:
+  contents: read # access to check out code and install dependencies
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4.2.2
+
+      - name: setup-java 23
+        uses: actions/setup-java@v4.7.0
+        with:
+          distribution: temurin
+          java-version: '23'
+          cache: maven
+
+      - name: build
+        run: mvn clean package
+
+      - name: upload
+        uses: actions/upload-artifact@v4.6.1
+        with:
+          name: CtOnlineReward-plugin
+          path: target/*.jar
